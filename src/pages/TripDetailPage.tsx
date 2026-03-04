@@ -52,7 +52,7 @@ export default function TripDetailPage() {
       navigate('/login');
       return;
     }
-    navigate(`/book/${trip.id}`);
+    navigate(`/booking/${trip.id}`);
   };
 
   return (
@@ -135,7 +135,7 @@ export default function TripDetailPage() {
           </div>
           <div>
             <p className="text-sm text-gray-500">Confort</p>
-            <p className="font-medium">{trip.bus.comfort_type.label}</p>
+            <p className="font-medium">{trip.bus.comfort_type_label}</p>
           </div>
           <div>
             <p className="text-sm text-gray-500">Capacité</p>
@@ -148,7 +148,7 @@ export default function TripDetailPage() {
         </div>
 
         <div className="flex gap-4 mt-4">
-          {trip.bus.has_ac && (
+          {trip.bus.has_air_conditioning && (
             <span className="flex items-center gap-1 text-sm text-blue-600 bg-blue-50 px-3 py-1 rounded-full">
               <Wind className="h-4 w-4" /> Climatisé
             </span>
@@ -158,7 +158,7 @@ export default function TripDetailPage() {
               <Wifi className="h-4 w-4" /> WiFi
             </span>
           )}
-          {trip.bus.has_usb && (
+          {trip.bus.has_usb_charging && (
             <span className="flex items-center gap-1 text-sm text-purple-600 bg-purple-50 px-3 py-1 rounded-full">
               <Usb className="h-4 w-4" /> USB
             </span>

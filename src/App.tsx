@@ -56,7 +56,7 @@ export default function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/trips" element={<TripSearchPage />} />
-        <Route path="/trips/:tripId" element={<TripDetailPage />} />
+        <Route path="/trips/:id" element={<TripDetailPage />} />
         <Route path="/announcements" element={<AnnouncementsPage />} />
         <Route path="/announcements/:announcementId" element={<AnnouncementDetailPage />} />
 
