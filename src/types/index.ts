@@ -1,3 +1,7 @@
+export type UserRole = 'super-admin' | 'admin' | 'chef-gare' | 'agent' | 'bagagiste' | 'user';
+
+export type UserStatus = 'active' | 'inactive' | 'pending' | 'banned';
+
 export interface User {
   id: string;
   name: string;
@@ -5,7 +9,15 @@ export interface User {
   lastname: string;
   email: string;
   phone: string;
+  phone_indication: string | null;
   gender: string | null;
+  status: UserStatus;
+  role: UserRole;
+  roles: string[];
+  permissions: string[];
+  company_id?: string | null;
+  email_verified_at: string | null;
+  created_at: string;
 }
 
 export interface City {
@@ -188,3 +200,81 @@ export interface PassengerForm {
   passenger_relation: PassengerRelation;
   seat_number: string;
 }
+
+/* ─── Admin Types ─────────────────────────────────────────────────── */
+
+export interface DashboardStats {
+  total_users: number;
+  total_companies: number;
+  total_trips: number;
+  total_bookings: number;
+  total_revenue: number;
+  total_tickets: number;
+  recent_bookings: Booking[];
+  upcoming_trips: Trip[];
+  users_trend: number;
+  bookings_trend: number;
+  revenue_trend: number;
+  trips_trend: number;
+}
+
+export interface AdminCity extends City {
+  is_active: boolean;
+  latitude: number | null;
+  longitude: number | null;
+  stations_count: number;
+  created_at: string;
+}
+
+export interface AdminStation extends Station {
+  company: Company;
+  address: string | null;
+  phone: string | null;
+  latitude: number | null;
+  longitude: number | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface AdminBus extends Bus {
+  company: Company;
+  photo: string | null;
+  color: string | null;
+  manufacture_year: number | null;
+  mileage: number | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface AdminDriver {
+  id: string;
+  company: Company;
+  firstname: string;
+  lastname: string;
+  full_name: string;
+  phone: string;
+  license_number: string;
+  license_type: string | null;
+  license_expiry: string | null;
+  photo: string | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface AdminRoute {
+  id: string;
+  company: Company;
+  departure_city: City;
+  arrival_city: City;
+  distance_km: number | null;
+  estimated_duration_minutes: number | null;
+  is_active: boolean;
+  created_at: string;
+}
+
+export interface RolePermission {
+  name: string;
+  label: string;
+  permissions: string[];
+}
+
