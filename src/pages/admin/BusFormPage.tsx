@@ -7,9 +7,9 @@ import { Button, Input, Select, Toggle, Alert, PageLoader } from '@/components/u
 import type { Company } from '@/types';
 
 const comfortOptions = [
-  { value: 'standard', label: 'Standard' },
+  { value: 'classique', label: 'Classique' },
   { value: 'vip', label: 'VIP' },
-  { value: 'premium', label: 'Premium' },
+  { value: 'ordinaire', label: 'Ordinaire' },
 ];
 
 export default function BusFormPage() {
@@ -23,13 +23,13 @@ export default function BusFormPage() {
     brand: '',
     model: '',
     total_seats: '',
-    comfort_type: 'standard',
+    comfort_type: 'classique',
     color: '',
     manufacture_year: '',
     mileage: '',
-    has_ac: false,
+    has_air_conditioning: false,
     has_wifi: false,
-    has_usb: false,
+    has_usb_charging: false,
     has_toilet: false,
     is_active: true,
   });
@@ -55,13 +55,13 @@ export default function BusFormPage() {
         brand: b.brand ?? '',
         model: b.model ?? '',
         total_seats: b.total_seats?.toString() ?? '',
-        comfort_type: b.comfort_type?.value ?? 'standard',
+        comfort_type: b.comfort_type ?? 'classique',
         color: b.color ?? '',
         manufacture_year: b.manufacture_year?.toString() ?? '',
         mileage: b.mileage?.toString() ?? '',
-        has_ac: b.has_ac ?? false,
+        has_air_conditioning: b.has_air_conditioning ?? false,
         has_wifi: b.has_wifi ?? false,
-        has_usb: b.has_usb ?? false,
+        has_usb_charging: b.has_usb_charging ?? false,
         has_toilet: b.has_toilet ?? false,
         is_active: b.is_active ?? true,
       });
@@ -137,9 +137,9 @@ export default function BusFormPage() {
         <div className="border-t border-gray-100 pt-4">
           <p className="text-sm font-medium text-gray-700 mb-3">Équipements</p>
           <div className="grid grid-cols-2 gap-3">
-            <Toggle label="Climatisation" checked={form.has_ac} onChange={(v) => updateField('has_ac', v)} />
+            <Toggle label="Climatisation" checked={form.has_air_conditioning} onChange={(v) => updateField('has_air_conditioning', v)} />
             <Toggle label="WiFi" checked={form.has_wifi} onChange={(v) => updateField('has_wifi', v)} />
-            <Toggle label="Prises USB" checked={form.has_usb} onChange={(v) => updateField('has_usb', v)} />
+            <Toggle label="Prises USB" checked={form.has_usb_charging} onChange={(v) => updateField('has_usb_charging', v)} />
             <Toggle label="Toilettes" checked={form.has_toilet} onChange={(v) => updateField('has_toilet', v)} />
           </div>
         </div>

@@ -133,7 +133,7 @@ export default function AdminDashboard() {
                 </div>
                 <div className="text-right">
                   <p className="text-sm font-medium text-gray-700">{trip.available_seats} places</p>
-                  <StatusBadge type="trip" value={trip.status?.value ?? 'scheduled'} />
+                  <StatusBadge type="trip" value={trip.status ?? 'scheduled'} />
                 </div>
               </div>
             ))}

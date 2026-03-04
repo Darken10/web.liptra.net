@@ -31,7 +31,7 @@ const columns: Column<AdminBus>[] = [
     key: 'comfort',
     header: 'Confort',
     render: (row) => (
-      <span className="text-gray-600">{row.comfort_type?.label ?? row.comfort_type?.value ?? '—'}</span>
+      <span className="text-gray-600">{row.comfort_type_label ?? row.comfort_type ?? '—'}</span>
     ),
   },
   {
@@ -39,9 +39,9 @@ const columns: Column<AdminBus>[] = [
     header: 'Équipements',
     render: (row) => {
       const features = [];
-      if (row.has_ac) features.push('AC');
+      if (row.has_air_conditioning) features.push('AC');
       if (row.has_wifi) features.push('WiFi');
-      if (row.has_usb) features.push('USB');
+      if (row.has_usb_charging) features.push('USB');
       if (row.has_toilet) features.push('WC');
       return features.length ? (
         <div className="flex gap-1 flex-wrap">

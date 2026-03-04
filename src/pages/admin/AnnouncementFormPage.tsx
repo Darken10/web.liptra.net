@@ -3,7 +3,8 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useQuery, useMutation } from '@tanstack/react-query';
 import { adminApi } from '@/lib/api';
 import PageHeader from '@/components/layout/PageHeader';
-import { Button, Input, Textarea, Toggle, Alert, PageLoader } from '@/components/ui';
+import { Button, Input, Select, Textarea, Toggle, Alert, PageLoader } from '@/components/ui';
+import type { Company } from '@/types';
 
 export default function AnnouncementFormPage() {
   const { announcementId } = useParams();
@@ -14,9 +15,18 @@ export default function AnnouncementFormPage() {
     title: '',
     content: '',
     image: '',
+    company_id: '',
     is_published: false,
   });
   const [error, setError] = useState<string | null>(null);
+
+  const { data: companies } = useQuery({
+    queryKey: ['admin', 'companies', 'all'],
+    queryFn: async () => {
+      const res = await adminApi.companies.list({ per_page: '100' });
+      return res.data.data.data as Company[];
+    },
+  });
 
   const { isLoading } = useQuery({
     queryKey: ['admin', 'announcements', announcementId],
@@ -28,6 +38,7 @@ export default function AnnouncementFormPage() {
         title: a.title ?? '',
         content: a.content ?? '',
         image: a.image ?? '',
+        company_id: a.company?.id ?? '',
         is_published: a.is_published ?? false,
       });
       return a;
@@ -72,6 +83,13 @@ export default function AnnouncementFormPage() {
       )}
 
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm p-6 space-y-5">
+        <Select
+          label="Compagnie"
+          value={form.company_id}
+          onChange={(e) => updateField('company_id', e.target.value)}
+          options={(companies ?? []).map((c) => ({ value: c.id, label: c.name }))}
+          placeholder="Choisir une compagnie"
+        />
         <Input label="Titre" value={form.title} onChange={(e) => updateField('title', e.target.value)} required />
         <Textarea label="Contenu" value={form.content} onChange={(e) => updateField('content', e.target.value)} rows={8} required />
         <Input label="URL de l'image" value={form.image} onChange={(e) => updateField('image', e.target.value)} placeholder="https://..." />

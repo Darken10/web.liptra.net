@@ -81,7 +81,7 @@ export default function TripFormPage() {
         departure_at: t.departure_at ? t.departure_at.slice(0, 16) : '',
         estimated_arrival_at: t.estimated_arrival_at ? t.estimated_arrival_at.slice(0, 16) : '',
         price: t.price?.toString() ?? '',
-        status: t.status?.value ?? 'scheduled',
+        status: t.status ?? 'scheduled',
       });
       return t;
     },

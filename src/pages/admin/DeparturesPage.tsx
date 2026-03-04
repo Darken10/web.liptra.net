@@ -36,7 +36,7 @@ export default function DeparturesPage() {
             {trip.route?.departure_city?.name} → {trip.route?.arrival_city?.name}
           </span>
         </div>
-        <StatusBadge type="trip" value={trip.status?.value ?? 'scheduled'} />
+        <StatusBadge type="trip" value={trip.status ?? 'scheduled'} />
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-sm">

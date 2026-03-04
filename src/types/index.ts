@@ -50,7 +50,8 @@ export interface Trip {
   price: number;
   price_formatted: string;
   available_seats: number;
-  status: { value: string; label: string };
+  status: string;
+  status_label: string;
 }
 
 export interface Route {
@@ -67,10 +68,11 @@ export interface Bus {
   brand: string | null;
   model: string | null;
   total_seats: number;
-  comfort_type: { value: string; label: string };
-  has_ac: boolean;
+  comfort_type: string;
+  comfort_type_label: string;
+  has_air_conditioning: boolean;
   has_wifi: boolean;
-  has_usb: boolean;
+  has_usb_charging: boolean;
   has_toilet: boolean;
 }
 

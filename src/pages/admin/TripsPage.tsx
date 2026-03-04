@@ -68,7 +68,7 @@ const columns: Column<Trip>[] = [
   {
     key: 'status',
     header: 'Statut',
-    render: (row) => <StatusBadge type="trip" value={row.status?.value ?? 'scheduled'} />,
+    render: (row) => <StatusBadge type="trip" value={row.status ?? 'scheduled'} />,
   },
 ];
 
