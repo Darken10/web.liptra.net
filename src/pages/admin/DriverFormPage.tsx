@@ -79,7 +79,7 @@ export default function DriverFormPage() {
   if (isEdit && isLoading) return <PageLoader />;
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier le chauffeur' : 'Nouveau chauffeur'}
         breadcrumbs={[

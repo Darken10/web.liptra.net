@@ -95,7 +95,7 @@ export default function BusFormPage() {
   if (isEdit && isLoading) return <PageLoader />;
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier le bus' : 'Nouveau bus'}
         breadcrumbs={[

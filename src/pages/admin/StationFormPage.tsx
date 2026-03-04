@@ -84,7 +84,7 @@ export default function StationFormPage() {
   if (isEdit && isLoading) return <PageLoader />;
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier la gare' : 'Nouvelle gare'}
         breadcrumbs={[

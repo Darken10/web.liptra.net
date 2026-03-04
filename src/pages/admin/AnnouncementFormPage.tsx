@@ -55,7 +55,7 @@ export default function AnnouncementFormPage() {
   if (isEdit && isLoading) return <PageLoader />;
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier l\'annonce' : 'Nouvelle annonce'}
         breadcrumbs={[

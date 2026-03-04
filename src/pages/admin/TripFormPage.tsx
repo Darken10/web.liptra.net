@@ -121,7 +121,7 @@ export default function TripFormPage() {
   ];
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier le voyage' : 'Nouveau voyage'}
         breadcrumbs={[

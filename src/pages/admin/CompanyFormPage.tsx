@@ -56,7 +56,7 @@ export default function CompanyFormPage() {
   if (isEdit && isLoading) return <PageLoader />;
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier la compagnie' : 'Nouvelle compagnie'}
         breadcrumbs={[

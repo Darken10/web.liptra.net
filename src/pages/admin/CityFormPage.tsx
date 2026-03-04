@@ -61,7 +61,7 @@ export default function CityFormPage() {
   if (isEdit && isLoading) return <PageLoader />;
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier la ville' : 'Nouvelle ville'}
         breadcrumbs={[

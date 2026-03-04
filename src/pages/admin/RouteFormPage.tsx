@@ -82,7 +82,7 @@ export default function RouteFormPage() {
   const cityOptions = (cities ?? []).map((c) => ({ value: c.id, label: `${c.name}${c.region ? ` (${c.region})` : ''}` }));
 
   return (
-    <div className="max-w-2xl">
+    <div>
       <PageHeader
         title={isEdit ? 'Modifier l\'itinéraire' : 'Nouvel itinéraire'}
         breadcrumbs={[
