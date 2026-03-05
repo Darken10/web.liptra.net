@@ -43,14 +43,16 @@ function AnnouncementCard({ announcement }: { announcement: Announcement }) {
           )}
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 flex-wrap">
-            {announcement.company && (
-              <span className="font-bold text-gray-900 text-[15px] leading-tight">
-                {announcement.company.name}
-              </span>
-            )}
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 min-w-0">
+              {announcement.company && (
+                <span className="font-bold text-gray-900 text-[15px] leading-tight truncate">
+                  {announcement.company.name}
+                </span>
+              )}
+            </div>
             {announcement.category && (
-              <span className="text-xs px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 font-medium">
+              <span className="text-xs px-2 py-0.5 rounded-full bg-primary-50 text-primary-700 font-medium flex-shrink-0 ml-3">
                 {announcement.category}
               </span>
             )}
@@ -79,7 +81,7 @@ function AnnouncementCard({ announcement }: { announcement: Announcement }) {
           {announcement.tags.map((tag) => (
             <span
               key={tag.id}
-              className="inline-flex items-center text-xs font-medium px-2.5 py-1 rounded-full"
+              className="inline-flex items-center text-xs font-medium px-3 py-0.5 rounded-full"
               style={{
                 backgroundColor: `${tag.color}15`,
                 color: tag.color,
@@ -94,7 +96,18 @@ function AnnouncementCard({ announcement }: { announcement: Announcement }) {
 
       {/* Content */}
       <Link to={`/announcements/${announcement.id}`} className="block">
-        <div className="px-5 pb-3">
+        
+
+        {/* Images */}
+       <div className="px-5">
+           <ImageGrid
+          images={announcement.images ?? []}
+          fallbackImage={announcement.image}
+          alt={announcement.title}
+        />
+        </div>
+
+        <div className="px-5 pb-3 mt-3">
           <h2 className="font-bold text-gray-900 text-lg leading-snug mb-1.5 hover:text-primary-600 transition-colors">
             {announcement.title}
           </h2>
@@ -104,13 +117,6 @@ function AnnouncementCard({ announcement }: { announcement: Announcement }) {
             </p>
           )}
         </div>
-
-        {/* Images */}
-        <ImageGrid
-          images={announcement.images ?? []}
-          fallbackImage={announcement.image}
-          alt={announcement.title}
-        />
       </Link>
 
       {/* Engagement bar */}
