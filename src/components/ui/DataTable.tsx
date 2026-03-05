@@ -58,8 +58,8 @@ export default function DataTable<T>({
 
   return (
     <div className={clsx('space-y-4', className)}>
-      <div className="overflow-x-auto rounded-lg border border-gray-200">
-        <table className="min-w-full divide-y divide-gray-200">
+      <div className="overflow-x-auto rounded-xl border border-gray-100 shadow-[var(--shadow-soft)]">
+        <table className="min-w-full divide-y divide-gray-100">
           <thead className="bg-gray-50">
             <tr>
               {columns.map((col) => (

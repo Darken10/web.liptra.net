@@ -24,11 +24,11 @@ export default function EmptyState({
         className,
       )}
     >
-      <div className="text-gray-300 mb-4">
-        {icon ?? <Inbox className="h-12 w-12" />}
+      <div className="w-16 h-16 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300 mb-5">
+        {icon ?? <Inbox className="h-8 w-8" />}
       </div>
-      <h3 className="text-base font-semibold text-gray-900 mb-1">{title}</h3>
-      {description && <p className="text-sm text-gray-500 max-w-sm mb-4">{description}</p>}
+      <h3 className="text-lg font-bold text-gray-900 mb-1.5">{title}</h3>
+      {description && <p className="text-sm text-gray-400 max-w-sm mb-5">{description}</p>}
       {action && <div>{action}</div>}
     </div>
   );

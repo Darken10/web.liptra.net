@@ -13,16 +13,16 @@ export default function StatCard({ label, value, icon, trend, className }: StatC
   return (
     <div
       className={clsx(
-        'bg-white rounded-xl border border-gray-200 shadow-sm p-6 flex items-start gap-4',
+        'bg-white rounded-2xl border border-gray-100 shadow-[var(--shadow-soft)] p-6 flex items-start gap-4 hover:shadow-[var(--shadow-card)] transition-shadow duration-200',
         className,
       )}
     >
       {icon && (
-        <div className="flex-shrink-0 p-3 rounded-lg bg-primary-50 text-primary-600">{icon}</div>
+        <div className="flex-shrink-0 p-3 rounded-xl bg-primary-50 text-primary-600">{icon}</div>
       )}
       <div className="min-w-0 flex-1">
-        <p className="text-sm font-medium text-gray-500 truncate">{label}</p>
-        <p className="text-2xl font-bold text-gray-900 mt-1">{value}</p>
+        <p className="text-sm font-medium text-gray-400 truncate">{label}</p>
+        <p className="text-2xl font-extrabold text-gray-900 mt-1">{value}</p>
         {trend && (
           <p
             className={clsx(

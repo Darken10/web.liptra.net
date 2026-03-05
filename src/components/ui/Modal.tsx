@@ -61,20 +61,20 @@ export default function Modal({
       />
       <div
         className={clsx(
-          'relative bg-white rounded-xl shadow-xl w-full max-h-[90vh] flex flex-col',
+          'relative bg-white rounded-2xl shadow-[var(--shadow-elevated)] w-full max-h-[90vh] flex flex-col animate-scale-in',
           sizeStyles[size],
         )}
       >
         {(title || closable) && (
           <div className="flex items-start justify-between p-6 pb-0">
             <div>
-              {title && <h2 className="text-lg font-semibold text-gray-900">{title}</h2>}
+              {title && <h2 className="text-lg font-bold text-gray-900">{title}</h2>}
               {description && <p className="text-sm text-gray-500 mt-1">{description}</p>}
             </div>
             {closable && (
               <button
                 onClick={onClose}
-                className="p-1 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition"
+                className="p-1.5 text-gray-400 hover:text-gray-600 rounded-xl hover:bg-gray-100 transition-colors cursor-pointer"
               >
                 <X className="h-5 w-5" />
               </button>
@@ -83,7 +83,7 @@ export default function Modal({
         )}
         <div className="p-6 overflow-y-auto flex-1">{children}</div>
         {footer && (
-          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50 rounded-b-xl">
+          <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-gray-100 bg-gray-50 rounded-b-2xl">
             {footer}
           </div>
         )}

@@ -13,9 +13,9 @@ export function Card({ children, className, padding = true, hover = false, onCli
   return (
     <div
       className={clsx(
-        'bg-white rounded-xl border border-gray-200 shadow-sm',
+        'bg-white rounded-2xl border border-gray-100 shadow-[var(--shadow-soft)] transition-all duration-300',
         padding && 'p-6',
-        hover && 'hover:shadow-md transition-shadow cursor-pointer',
+        hover && 'hover:shadow-[var(--shadow-card)] hover:-translate-y-0.5 cursor-pointer',
         className,
       )}
       onClick={onClick}
@@ -35,7 +35,7 @@ interface CardHeaderProps {
 
 export function CardHeader({ children, className, action }: CardHeaderProps) {
   return (
-    <div className={clsx('flex items-center justify-between mb-4', className)}>
+    <div className={clsx('flex items-center justify-between mb-5', className)}>
       <div>{children}</div>
       {action && <div>{action}</div>}
     </div>
@@ -43,7 +43,7 @@ export function CardHeader({ children, className, action }: CardHeaderProps) {
 }
 
 export function CardTitle({ children, className }: { children: ReactNode; className?: string }) {
-  return <h3 className={clsx('text-lg font-semibold text-gray-900', className)}>{children}</h3>;
+  return <h3 className={clsx('text-lg font-bold text-gray-900', className)}>{children}</h3>;
 }
 
 export function CardDescription({ children, className }: { children: ReactNode; className?: string }) {
@@ -56,7 +56,7 @@ export function CardContent({ children, className }: { children: ReactNode; clas
 
 export function CardFooter({ children, className }: { children: ReactNode; className?: string }) {
   return (
-    <div className={clsx('flex items-center justify-end gap-3 pt-4 border-t border-gray-100 mt-4', className)}>
+    <div className={clsx('flex items-center justify-end gap-3 pt-5 border-t border-gray-100 mt-5', className)}>
       {children}
     </div>
   );

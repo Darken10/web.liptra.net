@@ -189,16 +189,18 @@ export default function Sidebar({ userRole }: SidebarProps) {
         collapsed ? 'w-16' : 'w-64',
       )}
     >
-      <div className="flex items-center justify-between h-16 px-4 border-b border-gray-800">
+      <div className="flex items-center justify-between h-16 px-4 border-b border-gray-800/50">
         {!collapsed && (
-          <Link to="/admin" className="flex items-center gap-2">
-            <Bus className="h-7 w-7 text-primary-400" />
-            <span className="text-lg font-bold text-white">LIPTRA</span>
+          <Link to="/admin" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg bg-primary-500/20 flex items-center justify-center">
+              <Bus className="h-5 w-5 text-primary-400" />
+            </div>
+            <span className="text-lg font-extrabold text-white tracking-tight">LIPTRA</span>
           </Link>
         )}
         <button
           onClick={() => setCollapsed(!collapsed)}
-          className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition"
+          className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-colors cursor-pointer"
         >
           {collapsed ? <ChevronRight className="h-4 w-4" /> : <ChevronLeft className="h-4 w-4" />}
         </button>
@@ -222,10 +224,10 @@ export default function Sidebar({ userRole }: SidebarProps) {
                     to={item.href}
                     title={collapsed ? item.label : undefined}
                     className={clsx(
-                      'flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-colors',
+                      'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200',
                       active
-                        ? 'bg-primary-600/20 text-primary-400'
-                        : 'text-gray-400 hover:text-white hover:bg-gray-800',
+                        ? 'bg-primary-500/15 text-primary-400 shadow-sm shadow-primary-500/10'
+                        : 'text-gray-400 hover:text-white hover:bg-gray-800/60',
                     )}
                   >
                     <Icon className="h-5 w-5 flex-shrink-0" />

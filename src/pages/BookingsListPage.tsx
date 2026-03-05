@@ -1,15 +1,24 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, MapPin, Ticket, QrCode } from 'lucide-react';
+import {
+  Calendar,
+  MapPin,
+  Ticket,
+  QrCode,
+  ArrowRight,
+  Search,
+  Loader2,
+} from 'lucide-react';
 import { bookingApi } from '@/lib/api';
 import type { Booking } from '@/types';
 import clsx from 'clsx';
+import Button from '@/components/ui/Button';
 
-const STATUS_MAP: Record<string, { label: string; class: string }> = {
-  pending: { label: 'En attente', class: 'bg-yellow-100 text-yellow-800' },
-  confirmed: { label: 'Confirmée', class: 'bg-green-100 text-green-800' },
-  cancelled: { label: 'Annulée', class: 'bg-red-100 text-red-800' },
-  completed: { label: 'Terminée', class: 'bg-gray-100 text-gray-800' },
+const STATUS_MAP: Record<string, { label: string; class: string; dot: string }> = {
+  pending: { label: 'En attente', class: 'bg-amber-50 text-amber-700 border-amber-200', dot: 'bg-amber-500' },
+  confirmed: { label: 'Confirmée', class: 'bg-emerald-50 text-emerald-700 border-emerald-200', dot: 'bg-emerald-500' },
+  cancelled: { label: 'Annulée', class: 'bg-danger-50 text-danger-700 border-danger-200', dot: 'bg-danger-500' },
+  completed: { label: 'Terminée', class: 'bg-gray-50 text-gray-600 border-gray-200', dot: 'bg-gray-400' },
 };
 
 export default function BookingsListPage() {
@@ -24,99 +33,131 @@ export default function BookingsListPage() {
   }, []);
 
   if (loading) {
-    return <div className="text-center py-20 text-gray-500">Chargement...</div>;
+    return (
+      <div className="flex flex-col items-center justify-center py-24 text-gray-400 gap-3">
+        <Loader2 className="h-8 w-8 animate-spin" />
+        <span className="text-sm">Chargement de vos réservations…</span>
+      </div>
+    );
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-2xl font-bold text-gray-900 mb-6">
-        Mes réservations
-      </h1>
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 animate-fade-in">
+      <div className="flex items-center justify-between mb-8">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-gray-900">
+            Mes réservations
+          </h1>
+          {bookings.length > 0 && (
+            <p className="text-sm text-gray-400 mt-1">
+              {bookings.length} réservation{bookings.length > 1 ? 's' : ''}
+            </p>
+          )}
+        </div>
+        <Link to="/trips">
+          <Button variant="outline" size="sm">
+            <Search className="h-4 w-4 mr-1.5" />
+            Nouveau voyage
+          </Button>
+        </Link>
+      </div>
 
       {bookings.length === 0 ? (
-        <div className="text-center py-16 bg-white rounded-xl border">
-          <Ticket className="h-12 w-12 text-gray-300 mx-auto mb-3" />
-          <p className="text-gray-500 mb-4">Aucune réservation pour le moment</p>
-          <Link
-            to="/trips"
-            className="inline-flex items-center px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium hover:bg-primary-700"
-          >
-            Rechercher un voyage
+        <div className="text-center py-20 bg-white rounded-2xl border border-gray-100 shadow-[var(--shadow-soft)]">
+          <div className="w-16 h-16 rounded-2xl bg-primary-50 flex items-center justify-center mx-auto mb-4">
+            <Ticket className="h-8 w-8 text-primary-400" />
+          </div>
+          <h3 className="text-lg font-bold text-gray-900 mb-2">Aucune réservation</h3>
+          <p className="text-gray-400 mb-6 max-w-sm mx-auto">
+            Vous n'avez pas encore effectué de réservation. Trouvez votre prochain voyage !
+          </p>
+          <Link to="/trips">
+            <Button>
+              Rechercher un voyage
+              <ArrowRight className="h-4 w-4 ml-2" />
+            </Button>
           </Link>
         </div>
       ) : (
-        <div className="space-y-6">
+        <div className="space-y-5">
           {bookings.map((b) => {
             const status = STATUS_MAP[b.payment_status] ?? STATUS_MAP.pending;
             return (
               <div
                 key={b.id}
-                className="bg-white rounded-xl border p-5"
+                className="bg-white rounded-2xl border border-gray-100 shadow-[var(--shadow-soft)] hover:shadow-[var(--shadow-card)] transition-all duration-200 overflow-hidden"
               >
-                <div className="flex justify-between items-start mb-4 pb-4 border-b">
-                  <div>
-                    <span className="font-mono text-sm text-primary-600 font-bold block mb-1">
-                      {b.booking_reference}
-                    </span>
-                    <div className="flex items-center gap-2 text-gray-700 mb-2">
-                      <MapPin className="h-4 w-4 text-primary-500" />
-                      <span className="font-medium">
-                        {b.trip.route.departure_city.name} →{' '}
-                        {b.trip.route.arrival_city.name}
+                <div className="p-5 sm:p-6">
+                  <div className="flex justify-between items-start mb-4">
+                    <div>
+                      <span className="font-mono text-sm text-primary-600 font-bold block mb-2">
+                        {b.booking_reference}
                       </span>
+                      <div className="flex items-center gap-2 text-gray-800 mb-1.5">
+                        <MapPin className="h-4 w-4 text-primary-500 shrink-0" />
+                        <span className="font-bold">
+                          {b.trip.route.departure_city.name}
+                        </span>
+                        <ArrowRight className="h-3.5 w-3.5 text-gray-300" />
+                        <span className="font-bold">
+                          {b.trip.route.arrival_city.name}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 text-sm text-gray-400">
+                        <Calendar className="h-4 w-4" />
+                        {new Date(b.trip.departure_at).toLocaleDateString('fr-FR', {
+                          weekday: 'short',
+                          day: 'numeric',
+                          month: 'short',
+                          year: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        })}
+                      </div>
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-gray-500">
-                      <Calendar className="h-4 w-4" />
-                      {new Date(b.trip.departure_at).toLocaleDateString('fr-FR', {
-                        weekday: 'short',
-                        day: 'numeric',
-                        month: 'short',
-                        year: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                      })}
+                    <div className="flex flex-col items-end gap-2">
+                      <span
+                        className={clsx(
+                          'text-xs font-semibold px-3 py-1.5 rounded-full border flex items-center gap-1.5',
+                          status.class,
+                        )}
+                      >
+                        <span className={clsx('w-1.5 h-1.5 rounded-full', status.dot)} />
+                        {status.label}
+                      </span>
+                      <span className="font-extrabold text-primary-600 text-lg">
+                        {b.total_amount_formatted}
+                      </span>
                     </div>
                   </div>
-                  <span
-                    className={clsx(
-                      'text-xs font-medium px-2 py-1 rounded-full',
-                      status.class,
-                    )}
-                  >
-                    {status.label}
-                  </span>
-                </div>
 
-                <div className="space-y-2">
-                  <p className="text-sm font-medium text-gray-700 mb-3">Tickets:</p>
-                  {b.tickets.map((ticket) => (
-                    <Link
-                      key={ticket.id}
-                      to={`/tickets/${ticket.id}`}
-                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition border border-gray-200"
-                    >
-                      <div className="flex items-center gap-3">
-                        <QrCode className="h-5 w-5 text-primary-600" />
-                        <div>
-                          <p className="font-mono text-sm font-medium text-gray-900">
-                            {ticket.ticket_number}
-                          </p>
-                          <p className="text-xs text-gray-500">
-                            Passager: {ticket.passenger_name}
-                          </p>
+                  <div className="border-t border-dashed border-gray-200 pt-4 space-y-2">
+                    <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
+                      Tickets ({b.tickets.length})
+                    </p>
+                    {b.tickets.map((ticket) => (
+                      <Link
+                        key={ticket.id}
+                        to={`/tickets/${ticket.id}`}
+                        className="flex items-center justify-between p-3 bg-gray-50 rounded-xl hover:bg-primary-50 transition-colors group border border-transparent hover:border-primary-100"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-9 h-9 rounded-lg bg-white border border-gray-200 flex items-center justify-center group-hover:border-primary-200 transition-colors">
+                            <QrCode className="h-4 w-4 text-primary-600" />
+                          </div>
+                          <div>
+                            <p className="font-mono text-sm font-semibold text-gray-900">
+                              {ticket.ticket_number}
+                            </p>
+                            <p className="text-xs text-gray-400">
+                            {ticket.passenger_full_name}
+                            </p>
+                          </div>
                         </div>
-                      </div>
-                      <span className="text-xs font-medium px-2 py-1 rounded bg-primary-100 text-primary-700">
-                        Voir détails
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-
-                <div className="flex justify-end items-center text-sm mt-4 pt-4 border-t">
-                  <span className="font-bold text-primary-600">
-                    {b.total_amount_formatted}
-                  </span>
+                        <ArrowRight className="h-4 w-4 text-gray-300 group-hover:text-primary-500 transition-colors" />
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               </div>
             );

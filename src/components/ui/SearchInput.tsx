@@ -16,7 +16,7 @@ export default function SearchInput({ value, onClear, className, ...props }: Sea
         ref={ref}
         type="text"
         value={value}
-        className="w-full pl-10 pr-9 py-2 text-sm border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+        className="w-full pl-10 pr-9 py-2.5 text-sm border-2 border-gray-200 rounded-xl focus:outline-none focus:border-primary-500 focus:ring-0 hover:border-gray-300 transition-colors"
         {...props}
       />
       {value && onClear && (

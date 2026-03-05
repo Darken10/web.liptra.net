@@ -34,7 +34,7 @@ export default function Alert({
   return (
     <div
       className={clsx(
-        'rounded-lg border p-4 flex gap-3',
+        'rounded-xl border p-4 flex gap-3',
         config.bg,
         config.border,
         className,

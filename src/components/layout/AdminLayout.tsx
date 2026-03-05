@@ -1,6 +1,5 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import { useState } from 'react';
-import clsx from 'clsx';
 import Sidebar, { type UserRole } from './Sidebar';
 import TopBar from './TopBar';
 import { useAuth } from '@/contexts/AuthContext';
@@ -23,7 +22,7 @@ export default function AdminLayout() {
     return <Navigate to="/login" replace />;
   }
 
-  const userRole = ((user as Record<string, unknown>).role as UserRole) ?? 'user';
+  const userRole = ((user as unknown as Record<string, unknown>).role as UserRole) ?? 'user';
 
   if (!ADMIN_ROLES.includes(userRole)) {
     return <Navigate to="/" replace />;

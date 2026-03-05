@@ -39,7 +39,7 @@ export default function Dropdown({ trigger, items, align = 'right', className }:
       {open && (
         <div
           className={clsx(
-            'absolute z-30 mt-2 min-w-[180px] bg-white rounded-lg shadow-lg border border-gray-200 py-1',
+            'absolute z-30 mt-2 min-w-[180px] bg-white rounded-xl shadow-[var(--shadow-elevated)] border border-gray-100 py-1.5 animate-slide-down',
             align === 'right' ? 'right-0' : 'left-0',
           )}
         >
