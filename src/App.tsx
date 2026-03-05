@@ -33,6 +33,8 @@ import {
   TicketsPage as AdminTicketsPage,
   AnnouncementsPage as AdminAnnouncementsPage,
   AnnouncementFormPage,
+  TripSchedulesPage as AdminTripSchedulesPage,
+  TripScheduleFormPage,
   TicketValidationPage,
   BaggageCheckPage,
   DeparturesPage,
@@ -109,6 +111,11 @@ export default function App() {
         <Route path="trips" element={<AdminTripsPage />} />
         <Route path="trips/create" element={<TripFormPage />} />
         <Route path="trips/:tripId/edit" element={<TripFormPage />} />
+
+        {/* Trip Schedules */}
+        <Route path="trip-schedules" element={<AdminTripSchedulesPage />} />
+        <Route path="trip-schedules/create" element={<TripScheduleFormPage />} />
+        <Route path="trip-schedules/:scheduleId/edit" element={<TripScheduleFormPage />} />
 
         {/* Bookings (read-only) */}
         <Route path="bookings" element={<AdminBookingsPage />} />

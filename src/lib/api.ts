@@ -272,6 +272,21 @@ export const adminApi = {
       api.post<ApiResponse<import('@/types').Tag>>('/admin/tags', data),
     delete: (id: string) => api.delete(`/admin/tags/${id}`),
   },
+
+  // Trip Schedules
+  tripSchedules: {
+    list: (params?: Record<string, string>) =>
+      api.get<ApiResponse<import('@/types').PaginatedResponse<import('@/types').TripSchedule>>>('/admin/trip-schedules', { params }),
+    show: (id: string) =>
+      api.get<ApiResponse<import('@/types').TripSchedule>>(`/admin/trip-schedules/${id}`),
+    create: (data: Record<string, unknown>) =>
+      api.post<ApiResponse<import('@/types').TripSchedule>>('/admin/trip-schedules', data),
+    update: (id: string, data: Record<string, unknown>) =>
+      api.put<ApiResponse<import('@/types').TripSchedule>>(`/admin/trip-schedules/${id}`, data),
+    delete: (id: string) => api.delete(`/admin/trip-schedules/${id}`),
+    generate: (id: string, daysAhead?: number) =>
+      api.post(`/admin/trip-schedules/${id}/generate`, { days_ahead: daysAhead ?? 7 }),
+  },
 };
 
 export default api;

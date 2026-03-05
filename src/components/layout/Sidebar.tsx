@@ -7,6 +7,7 @@ import {
   MapPin,
   Route,
   Calendar,
+  CalendarClock,
   Ticket,
   BookOpen,
   Megaphone,
@@ -105,6 +106,12 @@ const sidebarNav: SidebarSection[] = [
         href: '/admin/trips',
         icon: Calendar,
         roles: ['super-admin', 'admin', 'chef-gare'],
+      },
+      {
+        label: 'Plannings',
+        href: '/admin/trip-schedules',
+        icon: CalendarClock,
+        roles: ['super-admin', 'admin'],
       },
       {
         label: 'Réservations',

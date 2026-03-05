@@ -173,6 +173,32 @@ export interface Reaction {
   user: User;
 }
 
+export type TripScheduleType = 'one_time' | 'daily' | 'weekly';
+
+export interface TripSchedule {
+  id: string;
+  company: Company;
+  route: Route;
+  bus: Bus;
+  driver: Driver;
+  departure_station: Station;
+  arrival_station: Station;
+  schedule_type: TripScheduleType;
+  schedule_type_label: string;
+  departure_times: string[];
+  days_of_week: number[] | null;
+  start_date: string;
+  end_date: string | null;
+  one_time_departure_at: string | null;
+  estimated_duration_minutes: number | null;
+  price: number;
+  price_formatted: string;
+  notes: string | null;
+  is_active: boolean;
+  trips_count?: number;
+  created_at: string;
+}
+
 export interface PaginatedResponse<T> {
   data: T[];
   current_page: number;

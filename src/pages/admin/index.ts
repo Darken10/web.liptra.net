@@ -13,6 +13,7 @@ export { default as TripsPage } from './TripsPage';
 export { default as BookingsPage } from './BookingsPage';
 export { default as TicketsPage } from './TicketsPage';
 export { default as AnnouncementsPage } from './AnnouncementsPage';
+export { default as TripSchedulesPage } from './TripSchedulesPage';
 
 // Form pages
 export { default as UserFormPage } from './UserFormPage';
@@ -24,6 +25,7 @@ export { default as DriverFormPage } from './DriverFormPage';
 export { default as RouteFormPage } from './RouteFormPage';
 export { default as TripFormPage } from './TripFormPage';
 export { default as AnnouncementFormPage } from './AnnouncementFormPage';
+export { default as TripScheduleFormPage } from './TripScheduleFormPage';
 
 // Role-specific pages
 export { default as TicketValidationPage } from './TicketValidationPage';
