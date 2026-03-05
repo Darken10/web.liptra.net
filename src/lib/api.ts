@@ -253,11 +253,24 @@ export const adminApi = {
       api.get<ApiResponse<PaginatedResponse<import('@/types').Announcement>>>('/admin/announcements', { params }),
     show: (id: string) =>
       api.get<ApiResponse<import('@/types').Announcement>>(`/admin/announcements/${id}`),
-    create: (data: Record<string, unknown>) =>
-      api.post<ApiResponse<import('@/types').Announcement>>('/admin/announcements', data),
-    update: (id: string, data: Record<string, unknown>) =>
-      api.put<ApiResponse<import('@/types').Announcement>>(`/admin/announcements/${id}`, data),
+    create: (data: FormData) =>
+      api.post<ApiResponse<import('@/types').Announcement>>('/admin/announcements', data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }),
+    update: (id: string, data: FormData) =>
+      api.post<ApiResponse<import('@/types').Announcement>>(`/admin/announcements/${id}`, data, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      }),
     delete: (id: string) => api.delete(`/admin/announcements/${id}`),
+  },
+
+  // Tags
+  tags: {
+    list: () =>
+      api.get<ApiResponse<import('@/types').Tag[]>>('/admin/tags'),
+    create: (data: { name: string; color?: string }) =>
+      api.post<ApiResponse<import('@/types').Tag>>('/admin/tags', data),
+    delete: (id: string) => api.delete(`/admin/tags/${id}`),
   },
 };
 

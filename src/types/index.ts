@@ -126,12 +126,28 @@ export interface Ticket {
   created_at: string;
 }
 
+export interface Tag {
+  id: string;
+  name: string;
+  slug: string;
+  color: string;
+}
+
+export interface AnnouncementImage {
+  id: string;
+  url: string;
+  order: number;
+}
+
 export interface Announcement {
   id: string;
   title: string;
   slug: string;
   content: string;
+  category: string | null;
   image: string | null;
+  images: AnnouncementImage[];
+  tags: Tag[];
   is_published: boolean;
   published_at: string | null;
   company?: Company;
