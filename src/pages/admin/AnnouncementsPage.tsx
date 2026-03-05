@@ -12,23 +12,42 @@ const columns: Column<Announcement>[] = [
   {
     key: 'announcement',
     header: 'Annonce',
-    render: (row) => (
-      <div className="flex items-center gap-3">
-        {row.image ? (
-          <img src={row.image} alt="" className="h-10 w-10 rounded-lg object-cover" />
-        ) : (
-          <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs font-medium">
-            IMG
+    render: (row) => {
+      const imgs = row.images ?? [];
+      return (
+        <div className="flex items-center gap-3">
+          {imgs.length > 0 ? (
+            <div className="relative w-20 h-20 flex-shrink-0">
+              <div className="grid grid-cols-2 grid-rows-2 gap-1 w-full h-full rounded-lg overflow-hidden">
+                {imgs.slice(0, 4).map((img) => (
+                  <img
+                    key={img.id}
+                    src={img.url}
+                    alt=""
+                    className={`object-cover w-full h-full ${imgs.length === 1 ? 'col-span-2 row-span-2' : ''}`}
+                  />
+                ))}
+              </div>
+              {imgs.length > 4 && (
+                <div className="absolute inset-0 flex items-end justify-end p-1">
+                  <div className="bg-black/60 text-white text-xs font-semibold rounded px-2 py-0.5">+{imgs.length - 4}</div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="h-10 w-10 rounded-lg bg-gray-100 flex items-center justify-center text-gray-400 text-xs font-medium">
+              IMG
+            </div>
+          )}
+          <div className="min-w-0">
+            <p className="font-medium text-gray-900 truncate max-w-[250px]">{row.title}</p>
+            <p className="text-xs text-gray-500 truncate max-w-[250px]">
+              {row.content?.replace(/<[^>]+>/g, '').slice(0, 60)}
+            </p>
           </div>
-        )}
-        <div className="min-w-0">
-          <p className="font-medium text-gray-900 truncate max-w-[250px]">{row.title}</p>
-          <p className="text-xs text-gray-500 truncate max-w-[250px]">
-            {row.content?.replace(/<[^>]+>/g, '').slice(0, 60)}
-          </p>
         </div>
-      </div>
-    ),
+      );
+    },
   },
   {
     key: 'author',
